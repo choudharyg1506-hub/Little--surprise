@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise 🌷</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0; min-height:100vh; overflow:hidden;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#ffd6e8,#ddd7ff);
+ display:flex; justify-content:center; align-items:center;
+}
+.card{
+ width:min(90%,520px); min-height:390px;
+ background:rgba(255,255,255,.94);
+ border-radius:30px; padding:38px 30px;
+ text-align:center;
+ box-shadow:0 18px 50px rgba(80,40,90,.18);
+ display:flex; flex-direction:column; justify-content:center;
+}
+.icon{font-size:58px; animation:bob 1.5s infinite alternate}
+@keyframes bob{to{transform:translateY(-9px) rotate(3deg)}}
+h1{color:#ff5b8d;margin:12px 0;font-size:31px}
+h2{color:#ff5b8d;font-size:25px}
+p{color:#555;line-height:1.65;font-size:17px}
+button{
+ border:0; border-radius:28px; padding:14px 25px;
+ background:#ff6b9c; color:white; font-size:16px;
+ cursor:pointer; margin:10px auto 0;
+ box-shadow:0 7px 16px rgba(255,107,156,.28);
+}
+button:hover{transform:scale(1.04)}
+.page{display:none; animation:fade .45s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.flower{position:fixed; top:-40px; font-size:22px; animation:fall 5s linear forwards; pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+.progress{position:fixed;top:16px;left:50%;transform:translateX(-50%);font-size:12px;color:#8b6b7a}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress">1 / 5</div>
+
+<div class="card">
+
+<section class="page active" id="p1">
+ <div class="icon">🌷</div>
+ <h1>Hey... wait.</h1>
+ <p>I made a tiny thing.<br>Don't ask why. Just click. 👀</p>
+ <button onclick="next()">Okay 👀</button>
+</section>
+
+<section class="page" id="p2">
+ <div class="icon">🔐</div>
+ <h1>Access Granted</h1>
+ <p>Congratulations.<br>You have successfully entered a completely unnecessary website.</p>
+ <button onclick="next()">Continue 😂</button>
+</section>
+
+<section class="page" id="p3">
+ <div class="icon">✨</div>
+ <h1>Okay, seriously...</h1>
+ <p>Some people just become part of your everyday life without even trying.</p>
+ <p>Then one day you realise they've made quite a few ordinary moments better.</p>
+ <button onclick="next()">One more... 🌸</button>
+</section>
+
+<section class="page" id="p4">
+ <div class="icon">🌸</div>
+ <h1>This one's for you.</h1>
+ <p>
+ You don't need to be perfect, super talented, or do anything amazing
+ to be appreciated.
+ </p>
+ <p>
+ Your random jokes, weird conversations, silly moments and just being yourself
+ are more than enough.
+ </p>
+ <button onclick="next()">Final screen 💗</button>
+</section>
+
+<section class="page" id="p5">
+ <div class="icon">💗</div>
+ <h1>So yeah...</h1>
+ <h2>I'm genuinely glad we're friends. 🌷</h2>
+ <p>
+ Thanks for being one of those people who can make a normal day
+ a little more fun.
+ </p>
+ <p><b>That's it. No emotional speech. 😭😂</b></p>
+ <p>Just wanted you to know.</p>
+ <button onclick="again()">Replay ✨</button>
+</section>
+
+</div>
+
+<script>
+let current=1;
+function next(){
+ document.getElementById("p"+current).classList.remove("active");
+ current++;
+ document.getElementById("p"+current).classList.add("active");
+ document.getElementById("progress").textContent=current+" / 5";
+ if(current===5) flowers();
+}
+function again(){
+ document.getElementById("p"+current).classList.remove("active");
+ current=1;
+ document.getElementById("p1").classList.add("active");
+ document.getElementById("progress").textContent="1 / 5";
+}
+function flowers(){
+ for(let i=0;i<22;i++){
+  const f=document.createElement("div");
+  f.className="flower";
+  f.textContent=["🌸","✨","🌷","💫","⭐"][Math.floor(Math.random()*5)];
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDelay=Math.random()*1.5+"s";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),6500);
+ }
+}
+</script>
+</body>
+</html>
